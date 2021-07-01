@@ -23,7 +23,7 @@ class Customer{
 
             $query = "
             INSERT INTO CUSTOMER(custEmail, custPassword, custLastName, custFirstName,
-            custBirth,custAddress,custCity,custCountry)s VALUES('$email','$password','$lastName'
+            custBirth,custAddress,custCity,custCountry) VALUES('$email','$password','$lastName'
             ,'$firstName','$birth','$phone','$address','$city','$country')
             ";
 
