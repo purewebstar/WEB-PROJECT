@@ -2,7 +2,7 @@
 
 class Expert{
 
-    protected static $connector;
+    private static $connector;
 
     public function __construct(){
         self::$connector = new Model();
@@ -65,9 +65,19 @@ class Expert{
 
     public static function getCvList(){
 
+        $query = 'SELECT * FROM CUST_CV';
+        $handler = self::$connector->getConnection();
+        $statement = $handler->prepare($query);
+
+        return $statement->execute();
     }
 
     public static function getCvDetail($cvId){
-        
+
+        $query = 'SELECT * FROM CUST_CV WHERE cvId='.$cvId;
+        $handler = self::$connector->getConnection();
+        $statement = $handler->prepare($query);
+
+        return $statement->execute();
     }
 }
