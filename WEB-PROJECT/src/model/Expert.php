@@ -19,7 +19,6 @@ class Expert{
             $address = $expert_data['address'];
             $city = $expert_data['City'];
             $country = $expert_data['Country'];
-            $cv = $expert_data['Cv'];
 
             $query = "
             INSERT INTO EXPERT(expertEmail, expertPassword, expertLastName, expertFirstName,
