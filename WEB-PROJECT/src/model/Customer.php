@@ -28,7 +28,7 @@ class Customer{
             ,'$firstName','$birth','$phone','$address','$city','$country','$cv')
             ";
 
-            $handler = self::$admin_db_conn->getConnection();
+            $handler = self::$connector->getConnection();
             $statement = $handler->prepare($query);
 
             return $statement->execute();
@@ -40,7 +40,7 @@ class Customer{
         $query = "
         SELECT * FROM CUSTOMER WHERE custEmail='$email' and custPassword='$password'
                  ";
-        $handler = self::$cust_db_conn->getConnection();
+        $handler = self::$connector->getConnection();
         $statement = $handler->prepare($query);
         $statement->execute();
 
