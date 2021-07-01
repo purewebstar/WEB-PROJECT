@@ -15,7 +15,7 @@ class Admin{
         $query = "
         SELECT * FROM ADMIN_ WHERE adminEmail='$email' and adminPassword='$password'
                  ";
-        $handler = self::$admin_db_conn->getConnection();
+        $handler = self::$connector->getConnection();
         $statement = $handler->prepare($query);
         $statement->execute();
 
@@ -113,7 +113,7 @@ class Admin{
          UPDATE EXPERT SET expertEmail='.$email.'expertPassword='.$password.'
          .'expertFirstName='.$expertFirstName'.'expertLastName='.$expertLastName WHERE expertId='$expertId'
         ";
-        $handler = self::$connector>getConnection();
+        $handler = self::$connector->getConnection();
         $statement = $handler->prepare($query);
 
         return $statement->execute();
