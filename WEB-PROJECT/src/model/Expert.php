@@ -27,7 +27,7 @@ class Expert{
             ,'$firstName','$birth','$phone','$address','$city','$country')
             ";
 
-            $handler = self::$admin_db_conn->getConnection();
+            $handler = self::$connector->getConnection();
             $statement = $handler->prepare($query);
 
             return $statement->execute();
@@ -40,7 +40,7 @@ class Expert{
         $query = "
         SELECT * FROM EXPERT WHERE expertEmail='$email' and expertPassword='$password'
                  ";
-        $handler = self::$expert_db_conn->getConnection();
+        $handler = self::$connector->getConnection();
         $statement = $handler->prepare($query);
         $statement->execute();
 
