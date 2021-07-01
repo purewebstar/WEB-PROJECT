@@ -114,4 +114,20 @@ class Expert{
             return $data;
         }
     }
+
+    public static function createRecommendation($expert){
+
+        $recommendation = $expert['recommendation'];
+        $expertId = $expert['expertId'];
+
+        $query = "
+         INSERT INTO EXPERT_RECOMMENDATION(expert_recom, expertId)
+         VALUES
+         ('$expert_recom','$expertId')
+        ";
+        $handler = self::$connector->getConnection();
+        $statement = $handler->prepare($query);
+
+        return $statement->execute();
+    }
 }
