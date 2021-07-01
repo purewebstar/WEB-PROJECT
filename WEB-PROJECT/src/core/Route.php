@@ -37,7 +37,9 @@
 
             break;
             // for expert users
-            require_once '../src/controller/'.self::$expertController.'.php';
+            
+            case 'expert':
+require_once '../src/controller/'.self::$expertController.'.php';
                 
 
             if(isset($url[0]) && method_exists(self::$expertController, self::$expertMethod)){
@@ -48,8 +50,6 @@
 
             self::$expertParam = $url ? array_values($url) : [];
             call_user_func_array([self::$expertController, self::$expertMethod],self::$expertParam);
-
-            case 'expert':
 
             break;
             // for admin users
