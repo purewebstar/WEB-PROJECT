@@ -71,8 +71,8 @@ class Admin{
     public static function readExpert($expertId){
         
         $query = "
-         SELECT * FROM EXPERT
-        ";
+         SELECT * FROM EXPERT WHERE expertId=
+        ".$expertId;
         $handler = self::$connector->getConnection();
         $statement = $handler->prepare($query);
         $statement->execute();
