@@ -2,7 +2,7 @@
 
 class Customer{
 
-    protected static $connector;
+    private static $connector;
 
     public function __construct(){
         self::$connector = new Model();
@@ -20,12 +20,11 @@ class Customer{
             $address = $cust_data['address'];
             $city = $cust_data['City'];
             $country = $cust_data['Country'];
-            $cv = $cust_data['Cv'];
 
             $query = "
             INSERT INTO CUSTOMER(custEmail, custPassword, custLastName, custFirstName,
-            custBirth,custAddress,custCity,custCountry,uploadCv) VALUES('$email','$password','$lastName'
-            ,'$firstName','$birth','$phone','$address','$city','$country','$cv')
+            custBirth,custAddress,custCity,custCountry)s VALUES('$email','$password','$lastName'
+            ,'$firstName','$birth','$phone','$address','$city','$country')
             ";
 
             $handler = self::$connector->getConnection();
@@ -63,11 +62,39 @@ class Customer{
         }
     }
 
-    public static function uploadCv($file){
+    public static function uploadCv($fileName, $custId){
+
+        $query = "INSERT INTO CUST_CV(cvName, custId) VALUES('$fileName','$custId')";
+        $handler = self::$connector->getConnection();
+        $statement = $handler->prepare($query);
+
+        return $statement->execute();
 
     }
 
-    public static function readExpertRecommendations($recommendId){
+    public static function readExpertRecommendations($exertId){
         
+        $query = "SELECT * FROM expert_recommendation WHERE expertId=".$expertId;
+        $handler = self::$connector->getConnection();
+        $statement = $handler->prepare($query);
+        $statement->execute();
+
+        $statement->setFetchMode(PDO::FETCH_ASSOC);
+        $result = $statement->fetchAll();
+
+        $data = ['status' =>false, 'recommendation' => ''];
+
+        if(count($result)>0){
+            
+             $data['status'] = true;
+             foreach($result as $r):
+                $data['recommendation'] = $r['expert_recom'];
+             endforeach;
+             
+             return $data;
+        }
+        else{
+            return $data;
+        }
     }
 }
