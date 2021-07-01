@@ -2,15 +2,15 @@
 
  class Route{
 
-    private static $custController;
+    private static $custController = 'Customer';
     private static $custMethod = 'cust_index';
     private static $custParam = [];
 
-    private static $expertController;
+    private static $expertController = 'Expert';
     private static $expertMethod = 'expert_index';
     private static $expertParam = [];
 
-    private static $adminController;
+    private static $adminController = 'Admin';
     private static $adminMethod = 'admin_index';
     private static $adminParam = [];
 
