@@ -1,16 +1,42 @@
+
 <?php
 
 class Admin{
 
-    private static $connector;
+    protected static $connector;
 
     public function __construct(){
-        $connector = new Model();
+        self::$connector = new Model();
     }
 
-    public static function loginAdmin($admin_email, $admin_password){
+    public static function loginAdmin($admin_data){
 
-        $conn = self::$connector->getConnection();
+        $email = $admin_data['email'];
+        $password = sha1($admin_data['password']);
+        $query = "
+        SELECT * FROM ADMIN_ WHERE adminEmail='$email' and adminPassword='$password'
+                 ";
+        $handler = self::$admin_db_conn->getConnection();
+        $statement = $handler->prepare($query);
+        $statement->execute();
+
+        $statement->setFetchMode(PDO::FETCH_ASSOC);
+        $result = $statement->fetchAll();
+
+        $data = ['status' =>false, 'email' => ''];
+
+        if(count($result)>0){
+            
+             $data['status'] = true;
+             foreach($result as $r):
+                $data['email'] = $r['adminEmail'];
+             endforeach;
+             
+             return $data;
+        }
+        else{
+            return $data;
+        }
 
     }
 
