@@ -2,7 +2,7 @@
 
 class Expert{
 
-    private static $connector;
+    protected static $connector;
 
     public function __construct(){
         self::$connector = new Model();
