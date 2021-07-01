@@ -67,8 +67,25 @@ class Expert{
         $query = 'SELECT * FROM CUST_CV';
         $handler = self::$connector->getConnection();
         $statement = $handler->prepare($query);
+        $statement->execute();
 
-        return $statement->execute();
+        $statement->setFetchMode(PDO::FETCH_ASSOC);
+        $result = $statement->fetchAll();
+
+        $data = ['status' =>false, 'cvName' => ''];
+
+        if(count($result)>0){
+            
+             $data['status'] = true;
+             foreach($result as $r):
+                $data['cvName'] = $r['cvName'];
+             endforeach;
+             
+             return $data;
+        }
+        else{
+            return $data;
+        }
     }
 
     public static function getCvDetail($cvId){
@@ -76,7 +93,25 @@ class Expert{
         $query = 'SELECT * FROM CUST_CV WHERE cvId='.$cvId;
         $handler = self::$connector->getConnection();
         $statement = $handler->prepare($query);
+        $statement->execute();
 
-        return $statement->execute();
+        $statement->setFetchMode(PDO::FETCH_ASSOC);
+        $result = $statement->fetchAll();
+
+        $data = ['status' =>false, 'cvName' => '', 'custId' => ''];
+
+        if(count($result)>0){
+            
+             $data['status'] = true;
+             foreach($result as $r):
+                $data['cvName'] = $r['cvName'];
+                $data['custId'] = $r['custId'];
+             endforeach;
+             
+             return $data;
+        }
+        else{
+            return $data;
+        }
     }
 }
