@@ -23,7 +23,7 @@
             // for customer users
             case 'customer':
 
-                require_once '../src/controller/'.self::$custController.'.php';
+                require_once '../src/controllers/'.self::$custController.'.php';
                 
 
                 if(isset($url[0]) && method_exists(self::$custController, self::$custMethod)){
@@ -39,7 +39,7 @@
             // for expert users
             
             case 'expert':
-require_once '../src/controller/'.self::$expertController.'.php';
+require_once '../src/controllers/'.self::$expertController.'.php';
                 
 
             if(isset($url[0]) && method_exists(self::$expertController, self::$expertMethod)){
@@ -54,7 +54,7 @@ require_once '../src/controller/'.self::$expertController.'.php';
             break;
             // for admin users
             case 'admin':
-                require_once '../src/controller/'.self::$adminController.'.php';
+                require_once '../src/controllers/'.self::$adminController.'.php';
                 
 
                 if(isset($url[0]) && method_exists(self::$adminController, self::$adminMethod)){
